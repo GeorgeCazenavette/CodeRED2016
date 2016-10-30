@@ -64,11 +64,13 @@ def sendSMS(message):
 fireMessageSent = False
 quakeMessageSent = False
 waterMessageSent = False
+tempMessageSent =False
 
 # TO DO //
 timeFireSent = time.time()
 timeQuakeSent = time.time()
 timeWaterSent = time.time()
+timeTempSent = time.time()
 while (True):
 	print ("FIRE:{}\tQUAKE:{}\tWATER:{}".format(GPIO.input(FIREPIN), GPIO.input(EARTHQUAKEPIN), GPIO.input(WATERPIN)))
 	       
