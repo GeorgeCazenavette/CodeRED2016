@@ -8,9 +8,12 @@ import threading
 import smtplib
 
 FIREPIN = 21 
+EARTHQUAKEPIN = 20
+
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(FIREPIN, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+GPIO.setup(EARTHQUAKE, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 
 
 def sendSMS(message):
@@ -60,11 +63,13 @@ def sendSMS(message):
 #sendSMS()
 
 fireMessageSent = False
+quakeMessageSent = False
 
 # TO DO //
 timeFireSent = time.time()
+timeQuakeSent = time.time()
 while (True):
-	print GPIO.input(FIREPIN)
+	#print GPIO.input(FIREPIN)
 	if (GPIO.input(FIREPIN) and fireMessageSent == False):
 		message = "Fire Detected! Call 911"
 		sendSMS(message)
@@ -73,5 +78,12 @@ while (True):
 	
 	if (time.time()-timeFireSent >= 60.0 and fireMessageSent == True):
 		fireMessageSent = False
-		
 	
+	if (GPIO.input(EARTHQUAKEPIN) and quakeMessageSent == False):
+		message = "Quake Detected in your area"
+		sendSMS(message)
+		fireMessageSent = True;
+		timeQuakeSent = time.time()
+		
+	if(time.time()-timeQuakeSent >= 60.0 and quakeMessageSent== True):
+		quakeMessageSent = False
