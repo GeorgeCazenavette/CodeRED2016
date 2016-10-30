@@ -80,6 +80,17 @@ void loop()
   // If something has changed or 250 milliseconds have passed, then update LCD Screen
   if (millis() - lastUpdated >= 250 | millis() < lastUpdated | quake | fire | water | temp > CRITICAL_TEMP)
   {
+    Serial.write(22);
+    Serial.write(12);
+    Serial.write(17);
+    Serial.write(128);
+    Serial.print("Temp:  ");
+    Serial.write(148);
+    Serial.print("Fire:  ");
+    Serial.write(168);
+    Serial.print("Water: ");
+    Serial.write(188);
+    Serial.print("Quake: ");
     Serial.write(136);
     Serial.print("    ");
     Serial.write(136);
