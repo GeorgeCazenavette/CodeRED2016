@@ -5,7 +5,7 @@ import smtplib
 FIREPIN = 21 
 EARTHQUAKEPIN = 20
 WATERPIN = 16
-TEMPPIN = 
+TEMPPIN = 12
 
 
 
