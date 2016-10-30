@@ -13,7 +13,7 @@ EARTHQUAKEPIN = 20
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(FIREPIN, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-GPIO.setup(EARTHQUAKE, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+GPIO.setup(EARTHQUAKEPIN, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 
 
 def sendSMS(message):
