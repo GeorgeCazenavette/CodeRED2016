@@ -9,11 +9,14 @@ import smtplib
 
 FIREPIN = 21 
 EARTHQUAKEPIN = 20
+WATERPIN = 16
+
 
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(FIREPIN, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 GPIO.setup(EARTHQUAKEPIN, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+GPIO.setup(WATERPIN, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 
 
 def sendSMS(message):
@@ -64,12 +67,14 @@ def sendSMS(message):
 
 fireMessageSent = False
 quakeMessageSent = False
+waterMessageSent = False
 
 # TO DO //
 timeFireSent = time.time()
 timeQuakeSent = time.time()
+timeWaterSent = time.time()
 while (True):
-	print ("FIRE:{}\tQUAKE:{}".format(GPIO.input(FIREPIN), GPIO.input(EARTHQUAKEPIN)))
+	print ("FIRE:{}\tQUAKE:{}\tWATER:{}".format(GPIO.input(FIREPIN), GPIO.input(EARTHQUAKEPIN), GPIO.input(WATERPIN)))
 	       
 	if (GPIO.input(FIREPIN) and fireMessageSent == False):
 		message = "Fire Detected! Call 911"
@@ -88,3 +93,12 @@ while (True):
 		
 	if(time.time()-timeQuakeSent >= 60.0 and quakeMessageSent== True):
 		quakeMessageSent = False
+	
+	if (GPIO.input(WATERPIN) and waterMessageSent == False):
+		message = "Water has been detected, possible flooding in your area."
+		sendSMS(message)
+		waterMessageSent = True;
+		timeWaterSent = time.time()
+		
+	if(time.time()-timeWaterSent >= 60.0 and waterMessageSent== True):
+		waterMessageSent = False
