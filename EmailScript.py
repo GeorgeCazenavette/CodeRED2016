@@ -1,7 +1,7 @@
 ﻿# Code is strictly for the GUI
 import RPi.GPIO as GPIO
 #from Tkinter import *
-from time import time, sleep, strftime, localtime
+import time
 import random, csv
 import threading
 #from twilio.rest import TwilioRestClient
