@@ -83,7 +83,7 @@ while (True):
 	if (GPIO.input(EARTHQUAKEPIN) and quakeMessageSent == False):
 		message = "Quake Detected in your area"
 		sendSMS(message)
-		fireMessageSent = True;
+		quakeMessageSent = True;
 		timeQuakeSent = time.time()
 		
 	if(time.time()-timeQuakeSent >= 60.0 and quakeMessageSent== True):
