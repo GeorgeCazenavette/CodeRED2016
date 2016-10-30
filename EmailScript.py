@@ -1,15 +1,11 @@
-﻿# Code is strictly for the GUI
 import RPi.GPIO as GPIO
-#from Tkinter import *
 import time
-import random, csv
-import threading
-#from twilio.rest import TwilioRestClient
 import smtplib
 
 FIREPIN = 21 
 EARTHQUAKEPIN = 20
 WATERPIN = 16
+TEMPPIN = 
 
 
 
@@ -17,7 +13,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(FIREPIN, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 GPIO.setup(EARTHQUAKEPIN, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 GPIO.setup(WATERPIN, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
-
+GPIO.setup(TEMPPIN, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 
 def sendSMS(message):
    # number to send the code to 
@@ -79,7 +75,7 @@ while (True):
 	if (GPIO.input(FIREPIN) and fireMessageSent == False):
 		message = "Fire Detected! Call 911"
 		sendSMS(message)
-		fireMessageSent = True;
+		fireMessageSent = True
 		timeFireSent = time.time()
 	
 	if (time.time()-timeFireSent >= 60.0 and fireMessageSent == True):
@@ -88,7 +84,7 @@ while (True):
 	if (GPIO.input(EARTHQUAKEPIN) and quakeMessageSent == False):
 		message = "Quake Detected in your area"
 		sendSMS(message)
-		quakeMessageSent = True;
+		quakeMessageSent = True
 		timeQuakeSent = time.time()
 		
 	if(time.time()-timeQuakeSent >= 60.0 and quakeMessageSent== True):
@@ -97,8 +93,17 @@ while (True):
 	if (GPIO.input(WATERPIN) and waterMessageSent == False):
 		message = "Water has been detected, possible flooding in your area."
 		sendSMS(message)
-		waterMessageSent = True;
+		waterMessageSent = True
 		timeWaterSent = time.time()
 		
 	if(time.time()-timeWaterSent >= 60.0 and waterMessageSent== True):
 		waterMessageSent = False
+
+	if (GPIO.input(TEMPPIN) and tempMessageSent == False):
+		message = "Temperature has reached a critical level."
+		sendSMS(message)
+		tempMessageSent = True
+		timeTempSent = time.time()
+		
+	if(time.time()-timeTempSent >= 60.0 and tempMessageSent == True):
+		tempMessageSent = False
