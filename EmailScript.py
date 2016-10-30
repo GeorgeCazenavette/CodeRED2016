@@ -10,7 +10,7 @@ import smtplib
 FIREPIN = 21 
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(FIREPIN, GPIO.IN, pull_up_down = GPIO.PUD_UP)
+GPIO.setup(FIREPIN, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 
 
 def sendSMS(message):
