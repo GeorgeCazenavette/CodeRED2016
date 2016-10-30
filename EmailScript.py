@@ -64,6 +64,7 @@ fireMessageSent = False
 # TO DO //
 timeFireSent = time.time()
 while (True):
+	print GPIO.input(FIREPIN)
 	if (GPIO.input(FIREPIN) and fireMessageSent == False):
 		message = "Fire Detected! Call 911"
 		sendSMS(message)
