@@ -69,7 +69,7 @@ quakeMessageSent = False
 timeFireSent = time.time()
 timeQuakeSent = time.time()
 while (True):
-	#print ("FIRE:{}\tQUAKE:{}".format(GPIO.input(FIREPIN), GPIO.input(QUAKEPIN))
+	print ("FIRE:{}\tQUAKE:{}".format(GPIO.input(FIREPIN), GPIO.input(QUAKEPIN)))
 	       
 	if (GPIO.input(FIREPIN) and fireMessageSent == False):
 		message = "Fire Detected! Call 911"
