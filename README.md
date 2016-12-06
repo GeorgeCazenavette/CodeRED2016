@@ -1,1 +1,1 @@
-First Commit
+EDS (Environmental Detection System) is a hackathon project that encorporated sensors, Arduino, and Raspberry Pi to create a system that would use an email-server to text a user with information about the environment of the sensor. EDS is capable of detecting flame, temperature, water, and shock.
